@@ -1,0 +1,13 @@
+$padding: 10px;
+
+ul {
+  padding-left: $padding;
+}
+
+li {
+  list-style-type: none;
+}
+
+.strikeOut {
+  text-decoration: line-through;
+}

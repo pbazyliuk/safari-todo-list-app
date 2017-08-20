@@ -1,0 +1,16 @@
+<template>
+  <require from="./styles.css"></require>
+  <h1>${appName}</h1>
+
+  <form method="post" submit.trigger="addTodo()">
+    <input type="text" placeholder="What will you like to do?" value.bind="todoTitle">
+    <button type="submit">Add</button>
+  </form>
+
+  <ul repeat.for="todo of todos">
+    <li>
+      <input type="checkbox" checked.bind='todo.completed' />
+      <span class.bind="todo.completed ? 'strikeOut' : ''">${todo.id} - ${todo.title}</span>
+    </li>
+  </ul>
+</template>
