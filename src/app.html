@@ -7,10 +7,32 @@
     <button type="submit">Add</button>
   </form>
 
+  <div>
+    <a href="#" click.trigger="filterTodos('all')">All</a>
+    <a href="#" click.trigger="filterTodos('active')">Active</a>
+    <a href="#" click.trigger="filterTodos('completed')">Completed</a>
+  </div>
+
+  <div>
+    <strong>${allTodosCount}</strong>${allTodosCount === 1 ? ' task ': ' tasks '} |
+    <strong>${activeTodosCount}</strong>${activeTodosCount === 1 ? ' task ': ' tasks '} left |
+    <strong>${completedTodosCount}</strong>${completedTodosCount === 1 ? ' task ': ' tasks '} completed
+  </div>
+
+  <div>
+    <button disabled.bind="allTodosCount === 0" click.trigger="removeAllTodos()">Remove All</button>
+    <button disabled.bind="completedTodosCount === 0" click.trigger="removeCompletedTodos()">Remove Completed</button>
+    <button disabled.bind="allTodosCount === 0" click.trigger="toggleAllTodos()">Toggle All</button>
+    <button disabled.bind="allTodosCount === 0" click.trigger="completeAllTodos()">Complete All</button>
+  </div>
+
   <ul repeat.for="todo of todos">
     <li>
       <input type="checkbox" checked.bind='todo.completed' />
-      <span class.bind="todo.completed ? 'strikeOut' : ''">${todo.id} - ${todo.title}</span>
+      <input show.bind="todo.isEditMode" type="text" value.bind="todo.title">
+      <span click.trigger="updateTodo(todo)" show.two-way="!todo.isEditMode" class.bind="todo.completed ? 'strikeOut' : ''">${todo.id} - ${todo.title}</span>
+      <button click.trigger="removeTodo(todo)">Remove</button>
+      <button click.trigger="updateTodo(todo)">${todo.isEditMode ? 'Update' : 'Edit'}</button>
     </li>
   </ul>
 </template>
